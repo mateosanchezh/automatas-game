@@ -1,9 +1,11 @@
-import React from 'react';
+// App.jsx
+import React, { useEffect } from 'react';
 import { useAutomata } from './hooks/useAutomata';
 import AutomataDiagram from './components/AutomataDiagram';
 import GameCanvas from './components/GameCanvas';
 import ControlsPanel from './components/ControlPanel';
 import TransitionsPanel from './components/TransitionsPanel';
+import './App.css';
 
 function App() {
   const { 
@@ -19,26 +21,41 @@ function App() {
 
   const stateInfo = getCurrentStateInfo();
 
+  // Prevenir scroll con Espacio
+  useEffect(() => {
+    const preventSpaceScroll = (e) => {
+      if (e.code === 'Space' || e.key === ' ') {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('keydown', preventSpaceScroll);
+
+    return () => {
+      window.removeEventListener('keydown', preventSpaceScroll);
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-slate-900 p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="app-container">
+      <div className="app-content">
         {/* Header */}
-        <header className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-white mb-3">
+        <header className="app-header">
+          <h1 className="app-title">
             🎮 Autómata Finito
           </h1>
-          <p className="text-gray-400 text-lg">
+          <p className="app-subtitle">
             Visualización interactiva de estados y transiciones
           </p>
         </header>
 
         {/* Diagrama del Autómata */}
-        <div className="mb-6">
+        <div className="app-section">
           <AutomataDiagram currentState={currentState} />
         </div>
 
         {/* Canvas del Juego */}
-        <div className="mb-6">
+        <div className="app-section">
           <GameCanvas 
             currentState={currentState} 
             onStateChange={handleStateChange}
@@ -46,7 +63,7 @@ function App() {
         </div>
 
         {/* Paneles de información */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="app-grid">
           <ControlsPanel />
           <TransitionsPanel 
             currentState={currentState}
@@ -56,10 +73,20 @@ function App() {
         </div>
 
         {/* Footer */}
-        <footer className="text-center mt-8">
-          <p className="text-gray-500 text-sm">
-            💻 Proyecto educativo de teoría de autómatas
-          </p>
+        <footer className="app-footer">
+          <div className="footer-content">
+            <p className="footer-title">💻 Proyecto educativo de teoría de autómatas</p>
+            <div className="footer-team">
+              <h3 className="team-title">Equipo de Desarrollo</h3>
+              <ul className="team-list">
+                <li className="team-member leader">Yesid Mateus Sanchez</li>
+                <li className="team-member">Christian Ardila Gonzalez</li>
+                <li className="team-member">Eliecer Arias Florez</li>
+                <li className="team-member">Sergio Olier Meza</li>
+                <li className="team-member">Santiago Silva Solar</li>
+              </ul>
+            </div>
+          </div>
         </footer>
       </div>
     </div>

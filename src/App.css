@@ -1,42 +1,203 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+/* App.css */
+
+/* Contenedor principal */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #111827, #0f172a);
   padding: 2rem;
+}
+
+.app-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+
+.app-subtitle {
+  color: #9ca3af;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+/* Secciones */
+.app-section {
+  margin-bottom: 1.5rem;
+}
+
+/* Grid de paneles */
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .app-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Footer */
+.app-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.footer-content {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.footer-title {
+  color: #9ca3af;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
 }
 
-@keyframes logo-spin {
+.footer-team {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.6));
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+}
+
+.team-title {
+  color: #60a5fa;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.team-member {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  padding: 0.5rem;
+  background: rgba(30, 41, 59, 0.4);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.team-member:hover {
+  background: rgba(51, 65, 85, 0.6);
+  transform: translateX(5px);
+}
+
+.team-member.leader {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fbbf24;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15));
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+}
+
+.team-member.leader:hover {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.25));
+  border-color: rgba(251, 191, 36, 0.5);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+}
+
+/* Eliminar estilos antiguos de #root si existen */
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Animaciones opcionales */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+.app-section {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.app-section:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.app-section:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.app-grid {
+  animation: fadeIn 0.5s ease-out;
+  animation-delay: 0.3s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .app-subtitle {
+    font-size: 1rem;
+  }
+
+  .footer-team {
+    padding: 1rem;
+  }
+
+  .team-title {
+    font-size: 1rem;
+  }
+
+  .team-member {
+    font-size: 0.875rem;
+  }
+
+  .team-member.leader {
+    font-size: 0.95rem;
   }
 }
 
-.card {
-  padding: 2em;
-}
+@media (max-width: 640px) {
+  .app-title {
+    font-size: 1.75rem;
+  }
 
-.read-the-docs {
-  color: #888;
+  .app-subtitle {
+    font-size: 0.875rem;
+  }
 }

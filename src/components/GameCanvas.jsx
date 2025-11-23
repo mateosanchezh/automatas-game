@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { GAME_CONFIG } from '../config/gameConfig';
 import { STATE_COLORS, STATES, STATE_ICONS } from '../config/automataConfig';
 import { clearCanvas, drawPlayer, drawGround } from '../utils/canvaUtils';
@@ -14,8 +14,99 @@ const GameCanvas = ({ currentState, onStateChange }) => {
     velocityY: 0
   });
   const [keysPressed, setKeysPressed] = useState([]);
+  const [isMuted, setIsMuted] = useState(false);
+  
+  // Referencias de audio
+  const audioRefs = useRef({
+    walk: null,
+    run: null,
+    jump: null,
+    land: null
+  });
 
   const keys = useKeyboard();
+
+  // Inicializar sonidos
+  useEffect(() => {
+    // Crear AudioContext
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioContext = new AudioContext();
+
+    // Función para crear tonos
+    const createTone = (frequency, duration, type = 'sine') => {
+      return () => {
+        if (isMuted) return;
+        
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.value = frequency;
+        oscillator.type = type;
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration);
+      };
+    };
+
+    // Crear sonidos específicos
+    audioRefs.current = {
+      walk: createTone(200, 0.1, 'square'),
+      run: createTone(300, 0.08, 'sawtooth'),
+      jump: () => {
+        if (isMuted) return;
+        
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.2);
+        
+        oscillator.type = 'sine';
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.2);
+      },
+      land: () => {
+        if (isMuted) return;
+        
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(150, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.15);
+        
+        oscillator.type = 'square';
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.15);
+      }
+    };
+
+    return () => {
+      if (audioContext.state !== 'closed') {
+        audioContext.close();
+      }
+    };
+  }, [isMuted]);
+
+  // Estado anterior para detectar cambios
+  const prevStateRef = useRef(currentState);
 
   useGameLoop(() => {
     const canvas = canvasRef.current;
@@ -38,20 +129,41 @@ const GameCanvas = ({ currentState, onStateChange }) => {
     if (keys[' ']) currentKeys.push('Space');
     setKeysPressed(currentKeys);
 
-    // Transiciones de estado
+    // Transiciones de estado con sonidos
     if (currentState === STATES.IDLE) {
-      if (isSpacePressed && playerPos.y >= groundY) onStateChange(STATES.JUMPING, 'Presionó espacio');
-      else if (isMoving) onStateChange(STATES.WALKING, 'Presionó flecha');
+      if (isSpacePressed && playerPos.y >= groundY) {
+        onStateChange(STATES.JUMPING, 'Presionó espacio');
+        audioRefs.current.jump?.();
+      }
+      else if (isMoving) {
+        onStateChange(STATES.WALKING, 'Presionó flecha');
+        audioRefs.current.walk?.();
+      }
     } else if (currentState === STATES.WALKING) {
-      if (isSpacePressed && playerPos.y >= groundY) onStateChange(STATES.JUMPING, 'Presionó espacio');
+      if (isSpacePressed && playerPos.y >= groundY) {
+        onStateChange(STATES.JUMPING, 'Presionó espacio');
+        audioRefs.current.jump?.();
+      }
       else if (!isMoving) onStateChange(STATES.IDLE, 'Soltó teclas');
-      else if (isShiftPressed) onStateChange(STATES.RUNNING, 'Presionó Shift');
+      else if (isShiftPressed) {
+        onStateChange(STATES.RUNNING, 'Presionó Shift');
+        audioRefs.current.run?.();
+      }
     } else if (currentState === STATES.RUNNING) {
-      if (isSpacePressed && playerPos.y >= groundY) onStateChange(STATES.JUMPING, 'Presionó espacio');
+      if (isSpacePressed && playerPos.y >= groundY) {
+        onStateChange(STATES.JUMPING, 'Presionó espacio');
+        audioRefs.current.jump?.();
+      }
       else if (!isMoving) onStateChange(STATES.IDLE, 'Soltó teclas');
-      else if (!isShiftPressed) onStateChange(STATES.WALKING, 'Soltó Shift');
+      else if (!isShiftPressed) {
+        onStateChange(STATES.WALKING, 'Soltó Shift');
+        audioRefs.current.walk?.();
+      }
     } else if (currentState === STATES.JUMPING) {
-      if (playerPos.y >= groundY && playerPos.velocityY >= 0) onStateChange(STATES.IDLE, 'Aterrizó');
+      if (playerPos.y >= groundY && playerPos.velocityY >= 0) {
+        onStateChange(STATES.IDLE, 'Aterrizó');
+        audioRefs.current.land?.();
+      }
     }
 
     // Actualizar física
@@ -101,18 +213,29 @@ const GameCanvas = ({ currentState, onStateChange }) => {
     ctx.fillRect(15, 15, 220, 50);
     ctx.fillStyle = STATE_COLORS[currentState];
     ctx.font = 'bold 18px Inter, sans-serif';
-    ctx.fillText(`${currentState}`, 25, 40); // Se eliminó el emoji
+    ctx.fillText(`${currentState}`, 25, 40);
     ctx.fillStyle = '#94a3b8';
     ctx.font = '12px Inter, sans-serif';
     ctx.fillText(`X: ${Math.round(playerPos.x)} Y: ${Math.round(playerPos.y)}`, 25, 56);
     ctx.restore();
   }, 60);
 
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
   return (
     <div className="gamecanvas-container">
       <div className="gamecanvas-header">
         <div className="gamecanvas-header-light"></div>
         <h2>Canvas del Juego</h2>
+        <button 
+          className="mute-button"
+          onClick={toggleMute}
+          title={isMuted ? 'Activar sonido' : 'Silenciar'}
+        >
+          {isMuted ? '🔇' : '🔊'}
+        </button>
       </div>
 
       <div className="gamecanvas-wrapper">
@@ -159,7 +282,7 @@ const GameCanvas = ({ currentState, onStateChange }) => {
             }}
           >
             <div className="pulse-dot"></div>
-            <span className="state-icon"></span> {/* Emoji eliminado */}
+            <span className="state-icon"></span>
             <span>{currentState}</span>
           </div>
 

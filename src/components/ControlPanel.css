@@ -1,0 +1,281 @@
+/* ControlPanel.css */
+
+.controlpanel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.controlpanel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.controlpanel-header-light {
+  width: 12px;
+  height: 12px;
+  background-color: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+  animation: pulse-control 2s infinite;
+}
+
+@keyframes pulse-control {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+.controlpanel-header h3 {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+}
+
+.controlpanel-wrapper {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
+  backdrop-filter: blur(24px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.controls-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.control-item {
+  background-color: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(4px);
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.control-item:hover {
+  border-color: #475569;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.control-item-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.control-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.control-item:hover .control-icon-box {
+  transform: scale(1.1) rotate(6deg);
+}
+
+.control-icon-box.blue {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+}
+
+.control-icon-box.green {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+}
+
+.control-icon-box.purple {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5);
+}
+
+.control-icon-box.gray {
+  background: linear-gradient(135deg, #6b7280, #475569);
+  box-shadow: 0 4px 15px rgba(107, 114, 128, 0.5);
+}
+
+.control-icon {
+  font-size: 1.5rem;
+}
+
+.control-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.control-key-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.control-key {
+  font-family: 'Courier New', monospace;
+  color: #fde047;
+  font-weight: bold;
+  font-size: 0.875rem;
+  background-color: rgba(15, 23, 42, 0.5);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.control-emoji {
+  font-size: 1.125rem;
+}
+
+.control-action {
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.control-description {
+  color: #94a3b8;
+  font-size: 0.75rem;
+  animation: fadeInUp 0.3s ease;
+  opacity: 0;
+}
+
+.control-item:hover .control-description {
+  opacity: 1;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.control-arrow {
+  color: #94a3b8;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+.control-item:hover .control-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Info boxes */
+.info-boxes {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.info-box {
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid;
+}
+
+.info-box.tip {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1));
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.info-box.combo {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+.info-box-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.info-box-icon {
+  font-size: 1.25rem;
+}
+
+.info-box-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.info-box.tip .info-box-title {
+  color: #93c5fd;
+}
+
+.info-box.combo .info-box-title {
+  color: #d8b4fe;
+}
+
+.info-box-text {
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.info-box.tip .info-box-text {
+  color: rgba(147, 197, 253, 0.8);
+}
+
+.info-box.combo .info-box-text {
+  color: rgba(216, 180, 254, 0.8);
+}
+
+/* Keyboard legend */
+.keyboard-legend {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.keyboard-legend-title {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.keyboard-keys {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.keyboard-key {
+  padding: 0.375rem 0.75rem;
+  background-color: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-family: 'Courier New', monospace;
+  color: #cbd5e1;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
