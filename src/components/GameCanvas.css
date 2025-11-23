@@ -1,0 +1,176 @@
+.gamecanvas-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.gamecanvas-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gamecanvas-header-light {
+  width: 12px;
+  height: 12px;
+  background-color: #c084fc;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #c084fc80;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+.gamecanvas-header h2 {
+  font-size: 1.75rem;
+  color: white;
+  font-weight: bold;
+}
+
+.gamecanvas-wrapper {
+  background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(30,41,59,0.9));
+  border: 1px solid rgba(51,65,85,0.5);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 0 25px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+.canvas-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.canvas-container {
+  position: relative;
+}
+
+.game-canvas {
+  border: 2px solid #475569;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.3);
+}
+
+.key-overlay {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.key-item {
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: white;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Estado actual */
+.state-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.state-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: currentColor;
+  animation: pulse 1.5s infinite;
+}
+
+.state-icon {
+  font-size: 1.5rem;
+}
+
+.speed-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.speed-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-align: center;
+}
+
+.speed-bars {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.speed-bar {
+  width: 8px;
+  height: 32px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Stats panel */
+.stats-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.stat-box {
+  background-color: rgba(30,41,59,0.5);
+  border: 1px solid rgba(51,65,85,0.5);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.stat-value.blue { color: #60a5fa; }
+.stat-value.purple { color: #c084fc; }
+.stat-value.green { color: #4ade80; }

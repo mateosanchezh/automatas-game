@@ -1,5 +1,7 @@
 import React from 'react';
+import './AutomataDiagram.css';
 import { STATES, STATE_COLORS, TRANSITIONS } from '../config/automataConfig';
+
 
 const AutomataDiagram = ({ currentState }) => {
   const statePositions = {
@@ -11,17 +13,17 @@ const AutomataDiagram = ({ currentState }) => {
 
   const transitions = [
     { from: STATES.IDLE, to: STATES.WALKING, label: '←/→' },
-    { from: STATES.WALKING, to: STATES.RUNNING, label: 'Shift' },
-    { from: STATES.RUNNING, to: STATES.WALKING, label: 'Release' },
-    { from: STATES.WALKING, to: STATES.IDLE, label: 'Release' },
+    { from: STATES.WALKING, to: STATES.RUNNING, label: 'Shift' }, 
+    { from: STATES.RUNNING, to: STATES.WALKING, label: '' },
+    { from: STATES.WALKING, to: STATES.IDLE, label: '' },
     { from: STATES.IDLE, to: STATES.JUMPING, label: 'Space' },
     { from: STATES.WALKING, to: STATES.JUMPING, label: 'Space' },
     { from: STATES.RUNNING, to: STATES.JUMPING, label: 'Space' },
-    { from: STATES.JUMPING, to: STATES.IDLE, label: 'Land' }
+    { from: STATES.JUMPING, to: STATES.IDLE, label: '' }
   ];
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 shadow-xl border border-slate-700">
+    <div className="AutomataDiagram">
       <h2 className="text-2xl font-bold text-white mb-4">
         Diagrama del Autómata
       </h2>

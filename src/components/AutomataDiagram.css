@@ -1,0 +1,50 @@
+/* AutomataDiagram.css */
+
+/* Contenedor principal */
+.AutomataDiagram {
+  background-color: #1e293b; /* bg-slate-800 */
+  border-radius: 1rem; /* rounded-xl */
+  padding: 1.5rem; /* p-6 */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* shadow-xl */
+  border: 1px solid #334155; /* border-slate-700 */
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+/* Título del diagrama */
+.AutomataDiagram h2 {
+  color: white; /* text-white */
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  margin-bottom: 1rem; /* mb-4 */
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+/* SVG centrado */
+.AutomataDiagram svg {
+  display: block;
+  margin: 0 auto; /* mx-auto */
+}
+
+/* Línea de transición */
+.AutomataDiagram line {
+  transition: stroke 0.2s, stroke-width 0.2s, opacity 0.2s;
+}
+
+/* Texto de transición */
+.AutomataDiagram text {
+  font-family: 'Inter', sans-serif;
+  transition: fill 0.2s, font-weight 0.2s;
+}
+
+/* Círculos de estados */
+.AutomataDiagram circle {
+  transition: r 0.2s, fill 0.2s, stroke-width 0.2s;
+}
+
+/* Hover opcional sobre estados */
+.AutomataDiagram circle:hover {
+  stroke-width: 4;
+  cursor: pointer;
+}
