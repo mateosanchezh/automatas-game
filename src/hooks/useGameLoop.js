@@ -1,4 +1,3 @@
-// src/hooks/useGameLoop.js
 import { useEffect, useRef } from 'react';
 
 /**

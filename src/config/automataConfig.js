@@ -1,5 +1,3 @@
-// config/automataConfig.js
-
 export const STATES = {
   IDLE: 'QUIETO',
   WALKING: 'CAMINANDO',

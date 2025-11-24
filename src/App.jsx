@@ -79,7 +79,7 @@ function App() {
             <div className="footer-team">
               <h3 className="team-title">Equipo de Desarrollo</h3>
               <ul className="team-list">
-                <li className="team-member leader">Yesid Mateus Sanchez</li>
+                <li className="team-member">Yesid Mateus Sanchez</li>
                 <li className="team-member">Christian Ardila Gonzalez</li>
                 <li className="team-member">Eliecer Arias Florez</li>
                 <li className="team-member">Sergio Olier Meza</li>

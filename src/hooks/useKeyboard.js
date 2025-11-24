@@ -1,4 +1,3 @@
-// src/hooks/useKeyboard.js
 import { useState, useEffect } from 'react';
 
 export const useKeyboard = () => {

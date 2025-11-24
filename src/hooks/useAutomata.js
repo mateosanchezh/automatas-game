@@ -1,4 +1,3 @@
-// src/hooks/useAutomata.js
 import { useState } from 'react';
 import { STATES } from '../config/automataConfig';
 

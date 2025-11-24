@@ -1,5 +1,3 @@
-// utils/canvaUtils.js
-
 /**
  * Limpia el canvas y dibuja el fondo con grid opcional
  */

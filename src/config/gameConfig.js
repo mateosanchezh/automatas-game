@@ -1,5 +1,3 @@
-// config/gameConfig.js
-
 export const GAME_CONFIG = {
   canvas: {
     width: 800,

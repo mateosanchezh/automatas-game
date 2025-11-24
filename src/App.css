@@ -1,5 +1,3 @@
-/* App.css */
-
 /* Contenedor principal */
 .app-container {
   min-height: 100vh;
@@ -125,14 +123,12 @@
   box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
 }
 
-/* Eliminar estilos antiguos de #root si existen */
 #root {
   width: 100%;
   margin: 0;
   padding: 0;
 }
 
-/* Animaciones opcionales */
 @keyframes fadeIn {
   from {
     opacity: 0;
